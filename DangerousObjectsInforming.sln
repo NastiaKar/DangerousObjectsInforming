@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.WebAPI", "DangerousObjects.WebAPI\DangerousObjects.WebAPI.csproj", "{E17FF9B6-5077-43E1-B0A5-481E7C6C3575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.BLL", "DangerousObjects.BLL\DangerousObjects.BLL.csproj", "{69A9A255-90E6-487F-9A2C-DA6E87A02FF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.DAL", "DangerousObjects.DAL\DangerousObjects.DAL.csproj", "{7E7FD7E8-19D3-47C2-9B31-051608780F70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.Models", "DangerousObjects.Models\DangerousObjects.Models.csproj", "{807EC206-CA2D-4104-8553-E9B368D2E34F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E17FF9B6-5077-43E1-B0A5-481E7C6C3575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17FF9B6-5077-43E1-B0A5-481E7C6C3575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17FF9B6-5077-43E1-B0A5-481E7C6C3575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17FF9B6-5077-43E1-B0A5-481E7C6C3575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A9A255-90E6-487F-9A2C-DA6E87A02FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A9A255-90E6-487F-9A2C-DA6E87A02FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A9A255-90E6-487F-9A2C-DA6E87A02FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A9A255-90E6-487F-9A2C-DA6E87A02FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7FD7E8-19D3-47C2-9B31-051608780F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7FD7E8-19D3-47C2-9B31-051608780F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7FD7E8-19D3-47C2-9B31-051608780F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7FD7E8-19D3-47C2-9B31-051608780F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
