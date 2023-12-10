@@ -7,4 +7,8 @@
         <RootNamespace>DangerousObjectsDAL</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DangerousObjects.Models\DangerousObjects.Models.csproj" />
+    </ItemGroup>
+
 </Project>
