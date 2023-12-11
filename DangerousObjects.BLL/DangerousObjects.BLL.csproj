@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DangerousObjects.DAL\DangerousObjects.DAL.csproj" />
       <ProjectReference Include="..\DangerousObjects.Models\DangerousObjects.Models.csproj" />
     </ItemGroup>
 

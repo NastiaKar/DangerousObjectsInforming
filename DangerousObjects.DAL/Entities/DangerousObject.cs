@@ -14,6 +14,6 @@ public class DangerousObject : BaseEntity
     public User Owner { get; set; } = null!;
     public int OwnerId { get; set; }
     [ForeignKey(nameof(TypeId))]
-    public ObjType Type { get; set; }
+    public ObjType ObjType { get; set; }
     public int TypeId { get; set; }
 }
