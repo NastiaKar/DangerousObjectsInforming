@@ -7,4 +7,12 @@
         <RootNamespace>DangerousObjectsBLL</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DangerousObjects.Models\DangerousObjects.Models.csproj" />
+    </ItemGroup>
+
 </Project>
