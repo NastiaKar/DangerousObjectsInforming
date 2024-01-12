@@ -25,6 +25,8 @@ public class MessageProfile : Profile
             .ForMember(dest => dest.Importance,
                 opt => opt.MapFrom(src => src.Importance.ConvertToImportance()));
         
-        CreateMap<UpdateMessage, Message>();
+        CreateMap<UpdateMessage, Message>()
+            .ForMember(dest => dest.Importance,
+                opt => opt.MapFrom(src => src.Importance.ConvertToImportance()));
     }
 }
