@@ -9,10 +9,7 @@ public class DangerousObjectProfile : Profile
 {
     public DangerousObjectProfile()
     {
-        CreateMap<DangerousObject, DisplayDangerousObject>()
-            .ForMember(dest => dest.OwnerId, 
-                opt => opt.MapFrom(src => src.Owner.Id));
-        
+        CreateMap<DangerousObject, DisplayDangerousObject>();
         
         CreateMap<CreateDangerousObject, DangerousObject>()
             .ForMember(dest => dest.ObjType, 
