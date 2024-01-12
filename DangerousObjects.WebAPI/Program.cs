@@ -1,7 +1,13 @@
+using System.Reflection;
+using DangerousObjectsBLL.Configure;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using DangerousObjectsDAL.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<JwtConfig>(config => config.Secret = builder.Configuration["Secrets:JwtConfig"]);
 
 // Add services to the container.
 builder.Services.AddDbContext<DataContext>(options =>
