@@ -20,10 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\DangerousObjects.BLL\DangerousObjects.BLL.csproj" />
       <ProjectReference Include="..\DangerousObjects.DAL\DangerousObjects.DAL.csproj" />
     </ItemGroup>
