@@ -9,7 +9,7 @@ namespace DangerousObjectsDAL.Repositories;
 public class DangerousObjectRepo : BaseRepo<DangerousObject>, IDangerousObjectRepo
 {
     public DangerousObjectRepo(DataContext context) : base(context) { }
-    public DangerousObjectRepo(DbContextOptions<DataContext> options) : base(options) { }
+    internal DangerousObjectRepo(DbContextOptions<DataContext> options) : base(options) { }
     
     public override async Task<IEnumerable<DangerousObject>> GetAllAsync() => await Task.Run(() => Table.ToList());
     

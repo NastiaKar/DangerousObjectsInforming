@@ -10,7 +10,7 @@ namespace DangerousObjectsDAL.Repositories;
 public class MessageRepo : BaseRepo<Message>, IMessageRepo
 {
     public MessageRepo(DataContext context) : base(context) { }
-    public MessageRepo(DbContextOptions<DataContext> options) : base(options) { }
+    internal MessageRepo(DbContextOptions<DataContext> options) : base(options) { }
     
     public override async Task<IEnumerable<Message>> GetAllAsync() => await Task.Run(() => Table.ToList());
     

@@ -9,7 +9,7 @@ namespace DangerousObjectsDAL.Repositories;
 public class UserRepo : BaseRepo<User>, IUserRepo
 {
     public UserRepo(DataContext context) : base(context) { }
-    public UserRepo(DbContextOptions<DataContext> options) : base(options) { }
+    internal UserRepo(DbContextOptions<DataContext> options) : base(options) { }
 
     public override async Task<IEnumerable<User>> GetAllAsync() => await Task.Run(() => Table.ToList());
     
