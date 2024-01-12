@@ -35,7 +35,7 @@ public class MessageService : IMessageService
     public async Task<DisplayMessage> Create(CreateMessage message, int userId)
     {
         var messageEntity = _mapper.Map<Message>(message);
-        messageEntity.SenderId = userId
+        messageEntity.SenderId = userId;
         await _repo.AddAsync(messageEntity);
         return _mapper.Map<DisplayMessage>(messageEntity);
     }
