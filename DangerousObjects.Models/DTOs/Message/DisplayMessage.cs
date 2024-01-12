@@ -4,6 +4,7 @@ namespace DangerousObjectsCommon.DTOs.Message;
 
 public class DisplayMessage
 {
+    public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string Content { get; set; } = null!;
     public string Importance { get; set; } = null!;
