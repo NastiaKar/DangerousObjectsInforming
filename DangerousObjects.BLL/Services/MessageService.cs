@@ -32,14 +32,15 @@ public class MessageService : IMessageService
         return _mapper.Map<DisplayMessage>(message);
     }
 
-    public async Task<DisplayMessage> Create(CreateMessage message)
+    public async Task<DisplayMessage> Create(CreateMessage message, int userId)
     {
         var messageEntity = _mapper.Map<Message>(message);
+        messageEntity.SenderId = userId;
         await _repo.AddAsync(messageEntity);
         return _mapper.Map<DisplayMessage>(messageEntity);
     }
 
-    public async Task<DisplayMessage> Update(int id, UpdateMessage message)
+    public async Task<DisplayMessage> Update(int id, UpdateMessage message, int userId)
     {
         var messageEntity = await _repo.FindAsync(id);
         if (messageEntity == null)
@@ -50,7 +51,7 @@ public class MessageService : IMessageService
         return _mapper.Map<DisplayMessage>(messageEntity);
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(int id, int userId)
     {
         var message = await _repo.FindAsync(id);
         if (message == null)

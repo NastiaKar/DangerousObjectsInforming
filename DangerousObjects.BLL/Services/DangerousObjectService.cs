@@ -33,14 +33,15 @@ public class DangerousObjectService  : IDangerousObjectService
         
     }
 
-    public async Task<DisplayDangerousObject> Create(CreateDangerousObject createDangerousObject)
+    public async Task<DisplayDangerousObject> Create(CreateDangerousObject createDangerousObject, int userId)
     {
         var dangerousObject = _mapper.Map<DangerousObject>(createDangerousObject);
+        dangerousObject.OwnerId = userId;
         await _repo.AddAsync(dangerousObject);
         return _mapper.Map<DisplayDangerousObject>(dangerousObject);
     }
 
-    public async Task<DisplayDangerousObject> Update(int id, UpdateDangerousObject updateDangerousObject)
+    public async Task<DisplayDangerousObject> Update(int id, UpdateDangerousObject updateDangerousObject, int userId)
     {
         var dangerousObject = await _repo.FindAsync(id);
         if (dangerousObject == null)
@@ -51,7 +52,7 @@ public class DangerousObjectService  : IDangerousObjectService
         return _mapper.Map<DisplayDangerousObject>(dangerousObject);
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(int id, int userId)
     {
         var dangerousObject = await _repo.FindAsync(id);
         if (dangerousObject == null)
