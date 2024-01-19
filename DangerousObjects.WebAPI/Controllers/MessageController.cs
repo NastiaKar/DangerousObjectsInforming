@@ -38,8 +38,8 @@ public class MessageController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var displayMessage = await _service.Create(request, int.Parse(userId));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var displayMessage = await _service.Create(request, userId);
             return CreatedAtAction(nameof(GetById), new { id = displayMessage.Id }, displayMessage);
         }
         catch (Exception)
@@ -53,8 +53,8 @@ public class MessageController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var displayMessage = await _service.Update(id, request, int.Parse(userId));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var displayMessage = await _service.Update(id, request, userId);
             return Ok(displayMessage);
         }
         catch (Exception)
@@ -68,8 +68,8 @@ public class MessageController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await _service.Delete(id, int.Parse(userId));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            await _service.Delete(id, userId);
             return Ok();
         }
         catch (Exception)

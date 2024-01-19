@@ -8,7 +8,7 @@ public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
     public DataContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-        optionsBuilder.UseSqlServer("Server=localhost;Database=DangerousObjects;Trusted_Connection=True;MultipleActiveResultSets=true");
+        optionsBuilder.UseSqlServer("data source=NASTIA\\SQLEXPRESS;database=DangerousObjects;trusted_connection=true;MultipleActiveResultSets=true");
 
         return new DataContext(optionsBuilder.Options);
     }

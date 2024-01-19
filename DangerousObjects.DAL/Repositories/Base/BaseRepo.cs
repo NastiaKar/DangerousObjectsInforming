@@ -10,13 +10,13 @@ public abstract class BaseRepo<T> : IRepo<T> where T : BaseEntity, new()
     protected DataContext Context { get; }
     public DbSet<T> Table { get; }
 
-    public BaseRepo(DataContext context)
+    protected BaseRepo(DataContext context)
     {
         Context = context;
         Table = Context.Set<T>();
     }
 
-    public BaseRepo(DbContextOptions<DataContext> options) : this(new DataContext(options)) { }
+    protected BaseRepo(DbContextOptions<DataContext> options) : this(new DataContext(options)) { }
 
     public virtual async Task<IEnumerable<T>> GetAllAsync() => await Table.ToListAsync();
 

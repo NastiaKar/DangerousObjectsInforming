@@ -1,4 +1,5 @@
-﻿using DangerousObjectsCommon.Auth;
+﻿using System.Text.RegularExpressions;
+using DangerousObjectsCommon.Auth;
 using FluentValidation;
 
 namespace DangerousObjectsInforming.Validators;
@@ -11,5 +12,8 @@ public class UserRegisterRequestValidator : AbstractValidator<UserRegisterReques
         RuleFor(x => x.Password)
             .NotEmpty()
             .Matches(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&\.,:;])[A-Za-z\d@$!%*#?&\.,:;]+$");
+        RuleFor(x => x.PhoneNumber)
+            .NotEmpty()
+            .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"));
     }
 }

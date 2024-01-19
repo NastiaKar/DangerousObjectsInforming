@@ -82,7 +82,8 @@ namespace DangerousObjectsDAL.Migrations
                     b.Property<int>("Importance")
                         .HasColumnType("int");
 
-                    b.Property<int>("SenderId")
+                    b.Property<int?>("SenderId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -159,7 +160,7 @@ namespace DangerousObjectsDAL.Migrations
                     b.HasOne("DangerousObjectsDAL.Entities.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("DangerousObject");

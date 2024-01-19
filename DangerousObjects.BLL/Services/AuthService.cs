@@ -33,7 +33,11 @@ public class AuthService : IAuthService
 
         string salt = _passwordHasher.GenerateSalt();
         string passwordHash = _passwordHasher.HashPassword(request.Password, salt);
-        var newUser = new User { Email = request.Email, Salt = salt, PasswordHash = passwordHash };
+        var newUser = new User
+        {
+            Name = request.Name, Email = request.Email, Salt = salt, PasswordHash = passwordHash,
+            PhoneNumber = request.PhoneNumber
+        };
 
         bool created = await _userRepo.AddAsync(newUser) > 0;
         if (!created)
@@ -64,7 +68,7 @@ public class AuthService : IAuthService
             Subject = new ClaimsIdentity(new[] {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }),
             Expires = DateTime.UtcNow.AddHours(6),

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DangerousObjectsDAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240112012252_initial")]
+    [Migration("20240119012950_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,8 @@ namespace DangerousObjectsDAL.Migrations
                     b.Property<int>("Importance")
                         .HasColumnType("int");
 
-                    b.Property<int>("SenderId")
+                    b.Property<int?>("SenderId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -161,7 +162,7 @@ namespace DangerousObjectsDAL.Migrations
                     b.HasOne("DangerousObjectsDAL.Entities.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("DangerousObject");

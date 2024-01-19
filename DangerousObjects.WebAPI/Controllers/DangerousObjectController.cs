@@ -14,10 +14,12 @@ namespace DangerousObjectsInforming.Controllers;
 public class DangerousObjectController : ControllerBase
 {
     private readonly IDangerousObjectService _service;
+    private readonly IHttpContextAccessor _accessor;
     
-    public DangerousObjectController(IDangerousObjectService service)
+    public DangerousObjectController(IDangerousObjectService service, IHttpContextAccessor accessor)
     {
         _service = service;
+        _accessor = accessor;
     }
     
     [HttpGet]
@@ -37,16 +39,11 @@ public class DangerousObjectController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody]CreateDangerousObject request)
     {
-        try
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var displayDangerousObject = await _service.Create(request, int.Parse(userId));
-            return CreatedAtAction(nameof(GetById), new { id = displayDangerousObject.Id }, displayDangerousObject);
-        }
-        catch (Exception)
-        {
-            return BadRequest();
-        }
+
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var displayDangerousObject = await _service.Create(request, userId);
+        return CreatedAtAction(nameof(GetById), new { id = displayDangerousObject.Id }, displayDangerousObject);
+        
     }
     
     [HttpPut]
@@ -54,8 +51,8 @@ public class DangerousObjectController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var displayDangerousObject = await _service.Update(id, request, int.Parse(userId));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var displayDangerousObject = await _service.Update(id, request, userId);
             return Ok(displayDangerousObject);
         }
         catch (Exception)
@@ -69,8 +66,8 @@ public class DangerousObjectController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await _service.Delete(id, int.Parse(userId));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            await _service.Delete(id, userId);
             return Ok();
         }
         catch (Exception)
