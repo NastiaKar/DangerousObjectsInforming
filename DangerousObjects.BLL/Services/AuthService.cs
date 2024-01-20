@@ -2,8 +2,10 @@
 using System.Security.Claims;
 using System.Text;
 using DangerousObjectsBLL.Configure;
+using DangerousObjectsBLL.Extensions;
 using DangerousObjectsBLL.Services.Interfaces;
 using DangerousObjectsCommon.Auth;
+using DangerousObjectsCommon.Enums;
 using DangerousObjectsDAL.Entities;
 using DangerousObjectsDAL.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -33,10 +35,14 @@ public class AuthService : IAuthService
 
         string salt = _passwordHasher.GenerateSalt();
         string passwordHash = _passwordHasher.HashPassword(request.Password, salt);
+
+        var position = request.Position.ConvertToPosition();
+        bool isVerified = position == Position.Admin;
+        
         var newUser = new User
         {
             Name = request.Name, Email = request.Email, Salt = salt, PasswordHash = passwordHash,
-            PhoneNumber = request.PhoneNumber
+            PhoneNumber = request.PhoneNumber, Position = position, IsVerified = isVerified
         };
 
         bool created = await _userRepo.AddAsync(newUser) > 0;

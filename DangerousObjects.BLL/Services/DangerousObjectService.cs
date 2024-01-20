@@ -11,11 +11,13 @@ public class DangerousObjectService  : IDangerousObjectService
 {
     private readonly IMapper _mapper;
     private readonly IDangerousObjectRepo _repo;
+    private readonly IUserRepo _userRepo;
     
-    public DangerousObjectService(IMapper mapper, IDangerousObjectRepo repo)
+    public DangerousObjectService(IMapper mapper, IDangerousObjectRepo repo, IUserRepo userRepo)
     {
         _mapper = mapper;
         _repo = repo;
+        _userRepo = userRepo;
     }
     
     public async Task<IEnumerable<DisplayDangerousObject>> GetAll()
@@ -35,14 +37,23 @@ public class DangerousObjectService  : IDangerousObjectService
 
     public async Task<DisplayDangerousObject> Create(CreateDangerousObject createDangerousObject, int userId)
     {
+        var user = await _userRepo.FindByIdAsync(userId);
+        if (!user.IsVerified)
+            throw new UserNotVerifiedException(nameof(user), "User is not verified.");
+        
         var dangerousObject = _mapper.Map<DangerousObject>(createDangerousObject);
         dangerousObject.OwnerId = userId;
+        dangerousObject.DateAdded = DateTime.Now;
         await _repo.AddAsync(dangerousObject);
         return _mapper.Map<DisplayDangerousObject>(dangerousObject);
     }
 
     public async Task<DisplayDangerousObject> Update(int id, UpdateDangerousObject updateDangerousObject, int userId)
     {
+        var user = await _userRepo.FindByIdAsync(userId);
+        if (!user.IsVerified)
+            throw new UserNotVerifiedException(nameof(user), "User is not verified.");
+        
         var dangerousObject = await _repo.FindAsync(id);
         if (dangerousObject == null)
             throw new DangerousObjectNotFoundException(nameof(dangerousObject),"Dangerous object not found.");
@@ -54,6 +65,10 @@ public class DangerousObjectService  : IDangerousObjectService
 
     public async Task Delete(int id, int userId)
     {
+        var user = await _userRepo.FindByIdAsync(userId);
+        if (!user.IsVerified)
+            throw new UserNotVerifiedException(nameof(user), "User is not verified.");
+        
         var dangerousObject = await _repo.FindAsync(id);
         if (dangerousObject == null)
             throw new DangerousObjectNotFoundException(nameof(dangerousObject),"Dangerous object not found.");

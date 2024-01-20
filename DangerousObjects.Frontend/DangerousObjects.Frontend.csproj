@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DangerousObjects.BLL\DangerousObjects.BLL.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -12,6 +12,7 @@ using DangerousObjectsInforming.Filters;
 //using DangerousObjectsInforming.Filters;
 using DangerousObjectsInforming.Validators;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,19 +27,17 @@ builder.Services.AddAutoMapper(typeof(DangerousObjectProfile));
 builder.Services.AddScoped<IDangerousObjectService, DangerousObjectService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IDangerousObjectRepo, DangerousObjectRepo>();
 builder.Services.AddScoped<IMessageRepo, MessageRepo>();
-builder.Services.AddValidatorsFromAssemblyContaining<CreateDangerousObjectValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<CreateMessageValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UpdateDangerousObjectValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UpdateMessageValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterRequestValidator>();
+builder.Services.AddControllers(config => 
+        { config.Filters.Add<CustomExceptionFilterAttribute>(); })
+    .AddFluentValidation(config => 
+        config.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-//builder.Services.AddControllers(config => { config.Filters.Add<CustomExceptionFilterAttribute>(); });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
