@@ -14,4 +14,6 @@ public class User : BaseEntity
     [ForeignKey(nameof(PositionId))] 
     public Position Position { get; set; }
     public int PositionId { get; set; }
+
+    public bool IsVerified { get; set; } = false;
 }

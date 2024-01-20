@@ -50,4 +50,10 @@ public class UserRepo : BaseRepo<User>, IUserRepo
         return await Table
             .Where(x => x.Email == email).FirstOrDefaultAsync();
     }
+    
+    public async Task<User?> FindByIdAsync(int id)
+    {
+        return await Table
+            .Where(x => x.Id == id).FirstOrDefaultAsync();
+    }
 }
