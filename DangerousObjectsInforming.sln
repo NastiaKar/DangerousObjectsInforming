@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.DAL", "Dan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.Models", "DangerousObjects.Models\DangerousObjects.Models.csproj", "{807EC206-CA2D-4104-8553-E9B368D2E34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.Frontend", "DangerousObjects.Frontend\DangerousObjects.Frontend.csproj", "{32AFF30E-8120-4302-9350-D419A5B3D4F6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +30,5 @@ Global
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32AFF30E-8120-4302-9350-D419A5B3D4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32AFF30E-8120-4302-9350-D419A5B3D4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32AFF30E-8120-4302-9350-D419A5B3D4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32AFF30E-8120-4302-9350-D419A5B3D4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
