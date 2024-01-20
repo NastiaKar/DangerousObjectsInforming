@@ -14,12 +14,10 @@ namespace DangerousObjectsInforming.Controllers;
 public class DangerousObjectController : ControllerBase
 {
     private readonly IDangerousObjectService _service;
-    private readonly IHttpContextAccessor _accessor;
     
-    public DangerousObjectController(IDangerousObjectService service, IHttpContextAccessor accessor)
+    public DangerousObjectController(IDangerousObjectService service)
     {
         _service = service;
-        _accessor = accessor;
     }
     
     [HttpGet]

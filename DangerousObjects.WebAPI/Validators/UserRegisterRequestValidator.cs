@@ -13,7 +13,6 @@ public class UserRegisterRequestValidator : AbstractValidator<UserRegisterReques
             .NotEmpty()
             .Matches(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&\.,:;])[A-Za-z\d@$!%*#?&\.,:;]+$");
         RuleFor(x => x.PhoneNumber)
-            .NotEmpty()
-            .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"));
+            .NotEmpty();
     }
 }
