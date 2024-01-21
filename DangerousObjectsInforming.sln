@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.DAL", "Dan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.Models", "DangerousObjects.Models\DangerousObjects.Models.csproj", "{807EC206-CA2D-4104-8553-E9B368D2E34F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DangerousObjects.Frontend", "DangerousObjects.Frontend", "{93281ADD-0161-453E-81EA-AC4BC8A4D579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangerousObjects.MVC", "DangerousObjects.MVC\DangerousObjects.MVC.csproj", "{95C3FB43-AF8B-497C-A67F-8A97DDB6C695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,12 @@ Global
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{807EC206-CA2D-4104-8553-E9B368D2E34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C3FB43-AF8B-497C-A67F-8A97DDB6C695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C3FB43-AF8B-497C-A67F-8A97DDB6C695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C3FB43-AF8B-497C-A67F-8A97DDB6C695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C3FB43-AF8B-497C-A67F-8A97DDB6C695}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{95C3FB43-AF8B-497C-A67F-8A97DDB6C695} = {93281ADD-0161-453E-81EA-AC4BC8A4D579}
 	EndGlobalSection
 EndGlobal
