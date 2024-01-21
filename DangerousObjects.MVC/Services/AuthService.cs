@@ -1,15 +1,15 @@
 ﻿using System.Text;
 using DangerousObjects.MVC.Helpers;
+using DangerousObjects.MVC.Helpers.DTOs;
 using DangerousObjects.MVC.Models;
 using DangerousObjects.MVC.Services.Interfaces;
-using DangerousObjectsCommon.Auth;
 using Newtonsoft.Json;
 
 namespace DangerousObjects.MVC.Services;
 
 public class AuthService : IAuthService
 {
-    public async Task<AuthResult> GetUserByLogin(UserLoginModel request)
+    public async Task<AuthResultDto> GetUserByLogin(UserLoginModel request)
     {
         string apiUrl = Routes.MainApiLink + Routes.AuthLogin;
         string jsonBody = JsonConvert.SerializeObject(request);
@@ -22,15 +22,19 @@ public class AuthService : IAuthService
             if (response.IsSuccessStatusCode)
             {
                 string responseString = await response.Content.ReadAsStringAsync();
-                AuthResult result = JsonConvert.DeserializeObject<AuthResult>(responseString);
-                return result;
+                return new AuthResultDto
+                {
+                    IsSuccess = true,
+                    Response = responseString
+                };
             }
             else
             {
-                return new AuthResult
+                string responseString = await response.Content.ReadAsStringAsync();
+                return new AuthResultDto
                 {
-                    Success = false,
-                    Errors = new List<string> { "Invalid login attempt." }
+                    IsSuccess = false,
+                    Response = responseString
                 };
             }
         }

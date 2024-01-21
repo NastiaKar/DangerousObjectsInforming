@@ -1,9 +1,9 @@
-﻿using DangerousObjects.MVC.Models;
-using DangerousObjectsCommon.Auth;
+﻿using DangerousObjects.MVC.Helpers.DTOs;
+using DangerousObjects.MVC.Models;
 
 namespace DangerousObjects.MVC.Services.Interfaces;
 
 public interface IAuthService
 {
-    Task<AuthResult> GetUserByLogin(UserLoginModel request);
+    Task<AuthResultDto> GetUserByLogin(UserLoginModel request);
 }
