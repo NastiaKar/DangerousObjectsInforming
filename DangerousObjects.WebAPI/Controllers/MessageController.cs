@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DangerousObjectsInforming.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-[Route("api/[controller]")]
+[Route("message/")]
 [ApiController]
 public class MessageController : ControllerBase
 {
@@ -19,21 +19,21 @@ public class MessageController : ControllerBase
         _service = service;
     }
     
-    [HttpGet]
+    [HttpGet, Route("list")]
     public async Task<IActionResult> GetAll()
     {
         var messages = await _service.GetAll();
         return Ok(messages);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet, Route("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
         var message = await _service.GetById(id);
         return Ok(message);
     }
     
-    [HttpPost]
+    [HttpPost, Route("create")]
     public async Task<IActionResult> Create([FromBody]CreateMessage request)
     {
         try
@@ -48,7 +48,7 @@ public class MessageController : ControllerBase
         }
     }
     
-    [HttpPut]
+    [HttpPut, Route("update/{id}")]
     public async Task<IActionResult> Update([FromBody]UpdateMessage request, int id)
     {
         try
@@ -63,7 +63,7 @@ public class MessageController : ControllerBase
         }
     }
     
-    [HttpDelete]
+    [HttpDelete, Route("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         try

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DangerousObjectsInforming.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-[Route("api/[controller]")]
+[Route("admin/")]
 [ApiController]
 public class AdminController : ControllerBase
 {
@@ -19,14 +19,14 @@ public class AdminController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPut("VerifyUser/{userId}")]
+    [HttpPut, Route("user/verify/{userId}")]
     public async Task<IActionResult> VerifyUser(int userId)
     {
         await _service.VerifyUser(userId);
         return Ok();
     }
     
-    [HttpGet("unverified")]
+    [HttpGet, Route("user/list")]
     public async Task<IActionResult> GetUnverified()
     {
         var users = await _userService.GetUnverified();

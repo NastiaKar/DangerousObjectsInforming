@@ -1,0 +1,55 @@
+﻿@model FullUserModel
+
+@{
+    ViewData["Title"] = "Verify";
+}
+
+<h1>Verify User</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsVerified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsVerified)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @using (Html.BeginForm("Verify", "Home", FormMethod.Post))
+    {
+        @Html.Hidden("Id", Model.Id)
+        @Html.Hidden("token", Model.Token)
+        <button type="submit" class="btn btn-primary">Verify</button>
+    }
+    
+    
+@Html.ActionLink("Back to List", "Index", new {token = Model.Token})
+</div>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DangerousObjectsInforming.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-[Route("api/[controller]")]
+[Route("user/")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -17,22 +17,24 @@ public class UserController : ControllerBase
     {
         _service = service;
     }
-    
-    [HttpGet]
+
+    [HttpGet, Route("list")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
     {
         var users = await _service.GetAll();
         return Ok(users);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet, Route("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetById(int id)
     {
         var user = await _service.GetById(id);
         return Ok(user);
     }
     
-    [HttpPut("{id}")]
+    [HttpPut, Route("update/{id}")]
     public async Task<IActionResult> Update([FromBody] UpdateUser request, int id)
     {
         try
@@ -46,7 +48,7 @@ public class UserController : ControllerBase
         }
     }
     
-    [HttpDelete("{id}")]
+    [HttpDelete, Route("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         try

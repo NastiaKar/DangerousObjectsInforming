@@ -14,6 +14,8 @@ builder.Services.AddHttpClient("DangerousObjects", client =>
 });
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -32,8 +34,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints => endpoints.MapRazorPages());
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{token?}");
 
 app.Run();

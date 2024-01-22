@@ -1,7 +1,7 @@
-﻿@model DangerousObjects.MVC.Models.UserLoginModel
+﻿@model UserLoginModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewData["Title"] = "Login";
 }
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.jc")" type="text/javascript"></script>
@@ -24,5 +24,9 @@
             @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Password)
         </div>
+        
+        <button type="submit" class="btn btn-primary">Login</button>
+        
+        @Html.ActionLink("Register", "Register", new {@class = "btn btn-link"})
     </fieldset>
 }

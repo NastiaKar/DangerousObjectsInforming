@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DangerousObjectsInforming.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-[Route("api/[controller]")]
+[Route("dangerousObject/")]
 [ApiController]
 public class DangerousObjectController : ControllerBase
 {
@@ -20,21 +20,21 @@ public class DangerousObjectController : ControllerBase
         _service = service;
     }
     
-    [HttpGet]
+    [HttpGet, Route("list")]
     public async Task<IActionResult> GetAll()
     {
         var dangerousObjects = await _service.GetAll();
         return Ok(dangerousObjects);
     }
     
-    [HttpGet("{id}")]
+    [HttpGet, Route("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
         var dangerousObject = await _service.GetById(id);
         return Ok(dangerousObject);
     }
 
-    [HttpPost]
+    [HttpPost, Route("create")]
     public async Task<IActionResult> Create([FromBody]CreateDangerousObject request)
     {
 
@@ -44,7 +44,7 @@ public class DangerousObjectController : ControllerBase
         
     }
     
-    [HttpPut]
+    [HttpPut, Route("update/{id}")]
     public async Task<IActionResult> Update([FromBody]UpdateDangerousObject request, int id)
     {
         try
@@ -59,7 +59,7 @@ public class DangerousObjectController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete, Route("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         try

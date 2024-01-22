@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DangerousObjectModel>
+
+@{
+    ViewData["Title"] = "GetDangerousObjects";
+}
+
+<h1>Dangerous Objects</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+    <p>
+        @Html.ActionLink("Create new Dangerous Object", "AddDangerousObject",
+    new {token = Model.First().Token, ownerId = Model.First().OwnerId})
+    </p>
+    </tbody>
+</table>

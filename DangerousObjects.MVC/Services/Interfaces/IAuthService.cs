@@ -6,4 +6,5 @@ namespace DangerousObjects.MVC.Services.Interfaces;
 public interface IAuthService
 {
     Task<AuthResultDto> GetUserByLogin(UserLoginModel request);
+    Task<bool?> RegisterUser(UserRegisterModel request);
 }
