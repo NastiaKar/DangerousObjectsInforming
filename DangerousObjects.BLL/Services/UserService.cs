@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using DangerousObjectsBLL.Services.Interfaces;
 using DangerousObjectsCommon.DTOs.User;
 using DangerousObjectsCommon.Exceptions;
+using DangerousObjectsDAL.Entities;
 using DangerousObjectsDAL.Repositories.Interfaces;
 
 namespace DangerousObjectsBLL.Services;
@@ -29,6 +31,26 @@ public class UserService : IUserService
         if (user == null)
             throw new UserNotFoundException(nameof(user),"User not found.");
         return _mapper.Map<DisplayUser>(user);
+    }
+    
+    public DisplayUser GetProfile(ClaimsIdentity identity)
+    {
+        var user = GetUserByToken(identity);
+        return new DisplayUser
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber,
+                IsVerified = user.IsVerified
+            };
+    }
+
+    public User GetUserByToken(ClaimsIdentity identity)
+    {
+        var id = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var user = _repo.FindByIdAsync(int.Parse(id!)).Result;
+        return user!;
     }
 
     public async Task<DisplayUser> Update(int id, UpdateUser user)

@@ -1,4 +1,5 @@
-﻿using DangerousObjectsCommon.DTOs.User;
+﻿using System.Security.Claims;
+using DangerousObjectsCommon.DTOs.User;
 
 namespace DangerousObjectsBLL.Services.Interfaces;
 
@@ -8,5 +9,5 @@ public interface IUserService
     Task<DisplayUser> GetById(int id);
     Task<DisplayUser> Update(int id, UpdateUser user);
     Task Delete(int id);
-    Task<IEnumerable<DisplayUser>> GetUnverified();
+    DisplayUser GetProfile(ClaimsIdentity identity);
 }

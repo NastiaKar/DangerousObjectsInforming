@@ -10,4 +10,6 @@ public interface IUserService
     Task<FullUserModel?> GetUserProfile(string token);
     Task<List<DangerousObjectModel>> GetDangerousObjects(string token);
     Task<bool> AddDangerousObject(DangerousObjectModel model);
+    public Task<List<MessageModel>> GetMessages(string token);
+    public Task<bool> AddMessage(MessageModel model);
 }

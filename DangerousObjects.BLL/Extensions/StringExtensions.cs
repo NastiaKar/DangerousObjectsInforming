@@ -12,14 +12,6 @@ public static class StringExtensions
         return objType;
     }
     
-    public static Position ConvertToPosition(this string source)
-    {
-        bool parsed = Enum.TryParse(source, out Position position);
-        if (!parsed)
-            throw new Exception("Position not found");
-        return position;
-    }
-    
     public static Importance ConvertToImportance(this string source)
     {
         bool parsed = Enum.TryParse(source, out Importance importance);

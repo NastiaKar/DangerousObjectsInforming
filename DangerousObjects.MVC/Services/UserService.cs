@@ -147,4 +147,56 @@ public class UserService : IUserService
             }
         }
     }
+    
+    public async Task<List<MessageModel>> GetMessages(string token)
+    {
+        string apiUrl = Routes.MainApiLink + Routes.MessageList;
+        
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonContent = await response.Content.ReadAsStringAsync();
+                List<MessageModel> messageList = JsonConvert.DeserializeObject<List<MessageModel>>(jsonContent);
+                
+                
+                if (messageList != null)
+                {
+                    foreach (var item in messageList)
+                    {
+                        item.Token = token;
+                    }
+
+                    return messageList;
+                }
+            }
+
+            return new List<MessageModel>();
+        }
+    }
+
+    public async Task<bool> AddMessage(MessageModel model)
+    {
+        string apiUrl = Routes.MainApiLink + Routes.AddMessage;
+        string jsonBody = JsonConvert.SerializeObject(model);
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", model.Token);
+            StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }

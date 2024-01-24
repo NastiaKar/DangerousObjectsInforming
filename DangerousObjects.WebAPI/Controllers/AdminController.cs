@@ -1,13 +1,16 @@
 ﻿using DangerousObjectsBLL.Services.Interfaces;
+using DangerousObjectsCommon.Constants;
+using DangerousObjectsCommon.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DangerousObjectsInforming.Controllers;
 
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("admin/")]
 [ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class AdminController : ControllerBase
 {
     private readonly IAdminService _service;
@@ -29,7 +32,7 @@ public class AdminController : ControllerBase
     [HttpGet, Route("user/list")]
     public async Task<IActionResult> GetUnverified()
     {
-        var users = await _userService.GetUnverified();
+        var users = await _service.GetUnverified();
         return Ok(users);
     }
 }

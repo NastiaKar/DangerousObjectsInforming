@@ -1,4 +1,6 @@
-﻿using DangerousObjectsBLL.Services.Interfaces;
+﻿using System.Security.Claims;
+using DangerousObjectsBLL.Services.Interfaces;
+using DangerousObjectsCommon.Constants;
 using DangerousObjectsCommon.DTOs.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +21,6 @@ public class UserController : ControllerBase
     }
 
     [HttpGet, Route("list")]
-    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
     {
         var users = await _service.GetAll();
@@ -27,10 +28,16 @@ public class UserController : ControllerBase
     }
     
     [HttpGet, Route("{id}")]
-    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetById(int id)
     {
         var user = await _service.GetById(id);
+        return Ok(user);
+    }
+    
+    [HttpGet, Route("profile")]
+    public IActionResult GetProfile()
+    {
+        var user = _service.GetProfile((ClaimsIdentity)User.Identity!);
         return Ok(user);
     }
     

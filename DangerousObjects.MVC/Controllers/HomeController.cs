@@ -1,14 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
-using DangerousObjects.MVC.Helpers;
 using DangerousObjects.MVC.Helpers.Constants;
 using DangerousObjects.MVC.Helpers.Enums;
 using DangerousObjects.MVC.Helpers.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using DangerousObjects.MVC.Models;
 using DangerousObjects.MVC.Services.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
 
 namespace DangerousObjects.MVC.Controllers;
 
@@ -140,6 +137,51 @@ public class HomeController : Controller
 
         return View(result);
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetMessages(string token)
+    {
+        var result = await _userService.GetMessages(token);
+
+        if (result == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        return View(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> AddMessage(string token, int userId)
+    {
+        var message = new MessageModel()
+        {
+            Token = token,
+            OwnerId = userId
+        };
+
+        return View(message);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> AddMessage(MessageModel model)
+    {
+        try
+        {
+            var result = await _userService.AddMessage(model);
+
+            if (result)
+            {
+                return RedirectToAction("Main", new { token = model.Token });
+            }
+        }
+        catch (Exception e)
+        {
+            ModelState.AddModelError("", e.Message);
+        }
+
+        return RedirectToAction("AddMessage", new { token = model.Token, userId = model.OwnerId });
+    }
 
     [HttpGet]
     public IActionResult Register()
@@ -192,18 +234,8 @@ public class HomeController : Controller
             token = tokenStr!;
         }
 
-        var callAdminPage = await _userService.GetUnverifiedUsers(token);
-
-        if (callAdminPage?.ResponseResult == ResponseResultEnum.Ok)
-        {
-            return View(callAdminPage.FullUserModels);
-        }
-        else if (callAdminPage?.ResponseResult == ResponseResultEnum.WrongRole)
-        {
-            return RedirectToAction("Main", new { token = token });
-        }
-
-        return RedirectToAction("Login");
+        return RedirectToAction("Main", new { token = token });
+        
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

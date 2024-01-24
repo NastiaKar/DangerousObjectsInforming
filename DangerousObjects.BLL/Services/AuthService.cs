@@ -5,6 +5,7 @@ using DangerousObjectsBLL.Configure;
 using DangerousObjectsBLL.Extensions;
 using DangerousObjectsBLL.Services.Interfaces;
 using DangerousObjectsCommon.Auth;
+using DangerousObjectsCommon.Constants;
 using DangerousObjectsCommon.Enums;
 using DangerousObjectsDAL.Entities;
 using DangerousObjectsDAL.Repositories.Interfaces;
@@ -36,13 +37,14 @@ public class AuthService : IAuthService
         string salt = _passwordHasher.GenerateSalt();
         string passwordHash = _passwordHasher.HashPassword(request.Password, salt);
 
-        var position = request.Position.ConvertToPosition();
-        bool isVerified = position == Position.Admin;
+        var role = request.Role;
+        bool isVerified = role == Roles.Admin;
+        bool isAdmin = role == Roles.Admin;
         
         var newUser = new User
         {
             Name = request.Name, Email = request.Email, Salt = salt, PasswordHash = passwordHash,
-            PhoneNumber = request.PhoneNumber, Position = position, IsVerified = isVerified
+            PhoneNumber = request.PhoneNumber, Role = role, IsVerified = isVerified, IsAdmin = isAdmin
         };
 
         bool created = await _userRepo.AddAsync(newUser) > 0;

@@ -1,16 +1,20 @@
 ﻿using DangerousObjectsBLL.Services.Interfaces;
+using DangerousObjectsCommon.DTOs.User;
 using DangerousObjectsCommon.Exceptions;
 using DangerousObjectsDAL.Repositories.Interfaces;
+using AutoMapper;
 
 namespace DangerousObjectsBLL.Services;
 
 public class AdminService : IAdminService
 {
     private readonly IUserRepo _repo;
+    private readonly IMapper _mapper;
 
-    public AdminService(IUserRepo repo)
+    public AdminService(IUserRepo repo, IMapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
     
     public async Task VerifyUser(int userId)
@@ -24,5 +28,12 @@ public class AdminService : IAdminService
         
         user.IsVerified = true;
         await _repo.UpdateAsync(user);
+    }
+    
+    public async Task<IEnumerable<DisplayUser>> GetUnverified()
+    {
+        var users = await _repo.GetAllAsync();
+        var unverified = users.Where(u => !u.IsVerified);
+        return _mapper.Map<IEnumerable<DisplayUser>>(unverified);
     }
 }

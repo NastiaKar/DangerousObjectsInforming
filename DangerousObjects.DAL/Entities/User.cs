@@ -11,9 +11,8 @@ public class User : BaseEntity
     public string PasswordHash { get; set; } = String.Empty;
     public string Salt { get; set; } = String.Empty;
     public string PhoneNumber { get; set; } = null!;
-    [ForeignKey(nameof(PositionId))] 
-    public Position Position { get; set; }
-    public int PositionId { get; set; }
+    public string Role { get; set; } = null!;
 
     public bool IsVerified { get; set; } = false;
+    public bool IsAdmin { get; set; } = false;
 }

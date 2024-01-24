@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MessageModel>
+
+@{
+    ViewData["Title"] = "GetMessages";
+}
+
+<h1>Messages</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Importance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DangerousObjectId)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DangerousObjectId)
+            </td>
+        </tr>
+    }
+    <p>
+        @Html.ActionLink("Create new Message", "AddMessage",
+            new {token = Model.First().Token, ownerId = Model.First().OwnerId})
+    </p>
+    </tbody>
+</table>
